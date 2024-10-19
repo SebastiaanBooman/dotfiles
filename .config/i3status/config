@@ -1,0 +1,27 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+}
+
+order += "tztime local"
+order += "path_exists updates"
+
+tztime local {
+        format = "%Y-%m-%d %H:%M"
+}
+
+# Checks whether a file called updates_available is present in /$HOME/bin/updates_available
+# If so, a green text with "updates" will show on i3 bar (This is a TODO)
+path_exists updates {
+        path = "/$HOME/bin/updates_available/updates_available"
+        format = "updates available"
+        format_down = ""
+}
