@@ -1,0 +1,8 @@
+window:
+  opacity: 0.8
+
+font:
+  size: 14
+
+debug:
+  enable: true
