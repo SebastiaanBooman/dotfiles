@@ -22,7 +22,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use light locker to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /$HOME/bin/light_lock_with_delay.sh
+exec --no-startup-id xss-lock --transfer-sleep-lock --i3lock --color 000000 --ignore-empty-password --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -187,7 +187,8 @@ bar {
 for_window [class="^.*"] border pixel 0
 #for_window [class="F*"] fullscreen enable
 
-bindsym $mod+l exec --no-startup-id light-locker-command -l
+
+bindsym $mod+l exec --no-startup-id i3lock --color 000000 --ignore-empty-password --nofork
 bindsym $mod+Shift+s exec /home/seb/bin/scrot_capture.sh
 
 #bindsym $mod+b workspace 2; exec --no-startup-id firefox
