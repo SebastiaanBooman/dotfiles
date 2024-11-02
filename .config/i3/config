@@ -22,7 +22,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use light locker to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock --i3lock --color 000000 --ignore-empty-password --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --color 000000 --ignore-empty-password --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -31,6 +31,11 @@ exec --no-startup-id nm-applet
 #exec --no-startup-id i3-msg fullscreen toggle global
 #bindsym $mod+b bar mode toggle
 exec_always --no-startup-id picom
+
+# Emulate a vim-like jump list for workspaces
+exec --no-startup-id /$HOME/bin/i3/workspace-history
+bindsym $mod+o exec /$HOME/bin/i3/workspace-history -mode=back
+bindsym $mod+i exec /$HOME/bin/i3/workspace-history -mode=forward
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -74,7 +79,7 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
@@ -122,6 +127,8 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+set $cmd_ws "cmd_ws"
 
 # switch to workspace
 bindsym $mod+z workspace $ws1
@@ -187,8 +194,12 @@ bar {
 for_window [class="^.*"] border pixel 0
 #for_window [class="F*"] fullscreen enable
 
-
 bindsym $mod+l exec --no-startup-id i3lock --color 000000 --ignore-empty-password --nofork
+
+# bindings for system control
+bindsym $mod+Shift+p workspace $cmd_ws exec alacritty -e /$HOME/bin/i3/system_ctl_commands.sh reboot
+bindsym $mod+Shift+k workspace $cmd_ws exec alacritty -e /$HOME/bin/i3/system_ctl_commands.sh poweroff
+
 bindsym $mod+Shift+s exec /home/seb/bin/scrot_capture.sh
 
 #bindsym $mod+b workspace 2; exec --no-startup-id firefox
