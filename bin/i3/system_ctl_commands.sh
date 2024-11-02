@@ -10,7 +10,7 @@ elif [[ $1 == "poweroff" ]]; then
 	prompt="POWER OFF? [Y/n]"
 else
 	echo 'Error: must supply first argument as either "reboot" or "poweroff"'
-	exit
+	return 1
 fi
 
 echo $prompt
