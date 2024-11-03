@@ -18,8 +18,10 @@ read input
 if [[ "$input" == "y" || "$input" == "Y" || -z "$input" ]]; then
 	if [[ $reboot ]]; then
 		sudo reboot
+		exit 0
 	else
 		sudo poweroff
+		exit 0
 	fi
 fi
 
