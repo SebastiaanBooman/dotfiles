@@ -22,6 +22,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use light locker to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
+#TODO: Fix i3lock locking the screen while media plays
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --color 000000 --ignore-empty-password --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
@@ -192,7 +193,6 @@ bar {
 # all classes/windows
 # classes are defined in Xorg (WM_class)
 for_window [class="^.*"] border pixel 0
-#for_window [class="F*"] fullscreen enable
 
 bindsym $mod+l exec --no-startup-id i3lock --color 000000 --ignore-empty-password --nofork
 
@@ -202,10 +202,6 @@ bindsym $mod+Shift+k workspace $cmd_ws exec alacritty -e /$HOME/bin/i3/system_ct
 
 bindsym $mod+Shift+s exec /home/seb/bin/scrot_capture.sh
 
-#bindsym $mod+b workspace 2; exec --no-startup-id firefox
-#bindsym $mod+n workspace 2; exec alacritty
-#i3-msg
-bindsym $mod+b workspace $ws3; exec --no-startup-id firefox; fullscreen toggle
-#bindsym $mod+Prior workspace 3; fullscreen toggle; exec --no-startup-id firefox
-#bindsym $mod+Next workspace 3; fullscreen toggle; exec --no-startup-id firefox
+bindsym $mod+b exec --no-startup-id /$HOME/bin/i3/start_firefox_fullscreen.sh
+
 bindsym $mod+u workspace $ws4; exec /$HOME/bin/launch_discord.sh
