@@ -16,7 +16,7 @@ fi
 echo $prompt
 read input
 if [[ "$input" == "y" || "$input" == "Y" || -z "$input" ]]; then
-	if [[ $reboot ]]; then
+	if [ $reboot = true ]; then
 		sudo reboot
 		exit 0
 	else
