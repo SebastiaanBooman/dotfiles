@@ -7,7 +7,7 @@ i3-msg workspace "3"
 i3-msg exec firefox
 
 # Wait for firefox startup
-for _ in {1..5}; do
+for _ in {1..10}; do
 	tree=$(i3-msg -t get_tree)
 	if echo $tree | grep -q '"class":"firefox"' || echo $tree | grep -q '"class":"firefox-esr"'; then
 		# Debouncer for i3 
