@@ -94,7 +94,7 @@ alias la='ls -A'
 
 alias ytm='/home/seb/src/FirefoxExtensions/YoutubeMusicDisordRichPresence/server/main'
 alias gm="mplayer '/home/seb/Music/Guided Mediation 20.m4a'"
-alias po='poweroff'
+alias vim="nvim"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -130,6 +130,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export EDITOR="nvim"
 
 # Add programming languages to $PATH
 export PYENV_ROOT="$HOME/.pyenv"
