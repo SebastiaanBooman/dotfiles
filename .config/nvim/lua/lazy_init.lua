@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
+  'tpope/vim-sleuth',
   import = 'plugins',
   change_detection = { notify = false },
 }
