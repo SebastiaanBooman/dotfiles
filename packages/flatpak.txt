@@ -1,0 +1,4 @@
+com.discordapp.Discord
+org.freedesktop.Platform
+org.freedesktop.Platform.GL.default
+org.freedesktop.Platform.openh264
