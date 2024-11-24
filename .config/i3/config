@@ -38,11 +38,20 @@ exec --no-startup-id /$HOME/bin/i3/workspace-history
 bindsym $mod+o exec /$HOME/bin/i3/workspace-history -mode=back
 bindsym $mod+i exec /$HOME/bin/i3/workspace-history -mode=forward
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+# Use pactl to adjust volume in PulseAudio. (with xob for overlay)
+#NOTE: do not need to refresh i3status as the bar does not contain volume info
+#set $refresh_i3status killall -SIGUSR1 i3status
+exec --no-startup-id /$HOME/bin/i3/xob/create_pipe.sh
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id /$HOME/bin/i3/xobvolume_mixer.sh up
+bindsym $mod+Page_Up exec --no-startup-id /$HOME/bin/i3/xob/volume_mixer.sh up
+
+bindsym XF86AudioLowerVolume exec --no-startup-id /$HOME/bin/i3/volume_mixer.sh down
+bindsym $mod+Page_Down exec --no-startup-id/$HOME/bin/i3/xob/volume_mixer.sh down
+
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym $mod+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
