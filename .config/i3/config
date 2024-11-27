@@ -1,5 +1,5 @@
 # Backgrounds
-exec_always --no-startup-id feh --bg-scale /home/seb/Pictures/TeresaBrewer/teresa_brewer_baltimore.png
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/teresa_brewer_baltimore.png
 
 set $mod Mod4
 
@@ -12,6 +12,8 @@ font pango:monospace 8
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
+
+exec --no-startup-id $HOME/bin/set_refresh_rate.sh
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -47,7 +49,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id /$HOME/bin/i3/xobvolume_mixer.
 bindsym $mod+Page_Up exec --no-startup-id /$HOME/bin/i3/xob/volume_mixer.sh up
 
 bindsym XF86AudioLowerVolume exec --no-startup-id /$HOME/bin/i3/volume_mixer.sh down
-bindsym $mod+Page_Down exec --no-startup-id/$HOME/bin/i3/xob/volume_mixer.sh down
+bindsym $mod+Page_Down exec --no-startup-id /$HOME/bin/i3/xob/volume_mixer.sh down
 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym $mod+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
