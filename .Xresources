@@ -1,0 +1,13 @@
+! Set background and foreground colors
+URxvt*background: #282a36
+URxvt*foreground: #f8f8f2
+
+! Set cursor color
+URxvt*cursorColor: #f8f8f2
+
+! Set font
+URxvt*font: xft:Monospace:size=14
+
+! Enable scroll bar
+URxvt*scrollBar: true
+!URxvt*scrollBar_right: true
