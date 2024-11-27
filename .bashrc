@@ -140,5 +140,10 @@ eval "$(pyenv init --path)"
 
 export PATH="/usr/local/go/bin:$PATH"
 
+# i3-sensible-terminal checks $TERMINAL variable with highest prio
+if [ -f /usr/bin/alacritty ]; then
+    export TERMINAL=/usr/bin/alacritty
+fi
+
 # git bare repository alias for dotfiles storage
 alias cfg="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/"
