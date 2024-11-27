@@ -1,15 +1,8 @@
 #!/bin/bash
 
-#TODO: Remove this next line
-# put quotes around variables to treat it as a single variable even if it contains whitespaces (eg for if -z)
-# $? is the output statuscode of the last ran command, use it for checking whether command was succesful
-# Script to setup a Debian system
-# Prereq: git installed
-
 function error() {
 	echo "Error during setup: $1"
 	echo "$EXIT_STATEMENT"
-	#clean_up
 	exit 1
 }
 
@@ -17,7 +10,6 @@ function error() {
 if [[ $EUID -ne 0 ]]; then
 	error "Must run with sudo priveleges"
 fi
-
 
 # Clone dotfiles repository
 which git > /dev/null
@@ -43,7 +35,7 @@ if [ -d "$dpkg_package_list_path" ]; then
 fi
 
 while read package; do
-  sudo apt install -y "$package"
+  sudo apt install -y -s "$package"
 done < $dpkg_package_list_path
 
 which flatpak >/dev/null
@@ -55,6 +47,10 @@ flatpak_package_list_path=$setup_path/packages/flatpak.txt
 if [ -d "$flatpak_package_list_path" ]; then
 	error "Could not find flatpak packages list at $flatpak_package_list_path"
 fi
+
+while read package; do
+  sudo flatpak install -y --non-interactive "$package"
+done < $dpkg_package_list_path
 
 # Set sudoers permissions
 cp $dotfiles_path/sudo/sudoers /etc/sudoers
