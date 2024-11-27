@@ -31,10 +31,13 @@ dotfiles_path="$HOME/.dotfiles"
 git clone --bare  https://github.com/SebastiaanBooman/dotfiles.git $dotfiles_path
 
 #NOTE: This removes any conflicting files that are stored in the dotfiles. This is perfect for a fresh install, but beware when running this willy nilly
+# The --git-dir and --work-tree options are persisently set in the .bashrc originating from the checked out repository
 git checkout --git-dir=$HOME/.cfg/ --work-tree=$HOME 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} rm -f {}
 
 # Install packages
-dpkg_package_list_path=$HOME/setup/packages/dpkg.txt
+setup_path="$HOME/setup"
+
+dpkg_package_list_path=$setup_path/packages/dpkg.txt
 if [ -d "$dpkg_package_list_path" ]; then
 	error "Could not find dpkg packages list at $dpkg_package_list_path"
 fi
@@ -48,7 +51,7 @@ if [ $? -ne 0 ]; then
 	error "flatpak not found on system"
 fi
 
-flatpak_package_list_path=$dotfiles_path/packages/flatpak.txt
+flatpak_package_list_path=$setup_path/packages/flatpak.txt
 if [ -d "$flatpak_package_list_path" ]; then
 	error "Could not find flatpak packages list at $flatpak_package_list_path"
 fi
@@ -57,9 +60,13 @@ fi
 cp $dotfiles_path/sudo/sudoers /etc/sudoers
 
 chmod +x ./parts/xob_setup.sh
+chmod +x ./parts/neovim_setup.sh
 
+# Building apps from source
 # Install volume display package
 ./parts/xob_setup.sh
+# Install Neovim (Debian stable contains an ancient version :( )
+./parts/neovim_setup.sh
 
 # Reboot
 echo "System setup completed successfully. Rebooting in 5 seconds..."
