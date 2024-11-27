@@ -6,6 +6,10 @@ function error() {
 	exit 1
 }
 
+function setup_echo() {
+	echo "SETUP SCRIPT: $1"
+}
+
 # Must run script with sudo priveledges
 if [[ $EUID -ne 0 ]]; then
 	error "Must run with sudo priveleges"
@@ -17,9 +21,9 @@ if [ $? -ne 0 ]; then
 	error "Git not found on system"
 fi
 
+setup_echo "Cloning dotfiles repository"
 dotfiles_path="$HOME/.dotfiles"
 
-#TODO: Need to ignore the .dotfiles repository first to avoid recursion during clone?
 git clone --bare  https://github.com/SebastiaanBooman/dotfiles.git $dotfiles_path
 
 #NOTE: This removes any conflicting files that are stored in the dotfiles. This is perfect for a fresh install, but beware when running this willy nilly
@@ -34,6 +38,7 @@ if [ -d "$dpkg_package_list_path" ]; then
 	error "Could not find dpkg packages list at $dpkg_package_list_path"
 fi
 
+setup_echo "Installing dpkg packages... (this may take a while)"
 while read package; do
   sudo apt install -y -s "$package"
 done < $dpkg_package_list_path
@@ -48,6 +53,7 @@ if [ -d "$flatpak_package_list_path" ]; then
 	error "Could not find flatpak packages list at $flatpak_package_list_path"
 fi
 
+setup_echo "Installing flatpak packages..."
 while read package; do
   sudo flatpak install -y --non-interactive "$package"
 done < $dpkg_package_list_path
@@ -60,8 +66,10 @@ chmod +x ./parts/neovim_setup.sh
 
 # Building apps from source
 # Install volume display package
+setup_echo "Installing xob"
 ./parts/xob_setup.sh
 # Install Neovim (Debian stable contains an ancient version :( )
+setup_echo "Installing neovim"
 ./parts/neovim_setup.sh
 
 # Reboot
