@@ -63,7 +63,7 @@ fi
 setup_echo "Installing flatpak packages..."
 while read package; do
   sudo flatpak install flathub -y --noninteractive "$package"
-done < $dpkg_package_list_path
+done < $flatpak_package_list_path
 
 # Set sudoers permissions
 cp $dotfiles_path/sudo/sudoers /etc/sudoers
