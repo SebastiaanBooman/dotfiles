@@ -40,7 +40,7 @@ fi
 
 setup_echo "Installing dpkg packages... (this may take a while)"
 while read package; do
-  sudo apt install -y -s "$package"
+  sudo apt install -y -qq "$package"
 done < $dpkg_package_list_path
 
 which flatpak >/dev/null
