@@ -53,9 +53,16 @@ if [ ! -f "$flatpak_package_list_path" ]; then
 	error "Could not find flatpak packages list at $flatpak_package_list_path"
 fi
 
+setup_echo "Adding flathub remote"
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+if [ $? -ne 0 ]; then
+	error "Could not add flathub as remote"
+fi
+
 setup_echo "Installing flatpak packages..."
 while read package; do
-  sudo flatpak install -y --noninteractive "$package"
+  sudo flatpak install flathub -y --noninteractive "$package"
 done < $dpkg_package_list_path
 
 # Set sudoers permissions
