@@ -34,7 +34,7 @@ git checkout --git-dir=$HOME/.cfg/ --work-tree=$HOME 2>&1 | egrep "\s+\." | awk 
 setup_path="$HOME/setup"
 
 dpkg_package_list_path=$setup_path/packages/dpkg.txt
-if [ -d "$dpkg_package_list_path" ]; then
+if [ ! -f "$dpkg_package_list_path" ]; then
 	error "Could not find dpkg packages list at $dpkg_package_list_path"
 fi
 
@@ -49,7 +49,7 @@ if [ $? -ne 0 ]; then
 fi
 
 flatpak_package_list_path=$setup_path/packages/flatpak.txt
-if [ -d "$flatpak_package_list_path" ]; then
+if [ ! -f "$flatpak_package_list_path" ]; then
 	error "Could not find flatpak packages list at $flatpak_package_list_path"
 fi
 
