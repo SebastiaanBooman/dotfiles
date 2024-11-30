@@ -8,6 +8,12 @@ case $- in
       *) return;;
 esac
 
+eval "$(fzf --bash)"
+
+alias fzf='fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})+abort"'
+# only list directories
+alias fzfd='find . -type d | fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})+abort"'
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -108,6 +114,10 @@ fi
 # have ls run after commands
 function cd { 
     builtin cd "$@" && ls 
+}
+
+function lsf { 
+    ls | fzf
 }
 
 function cls { 
