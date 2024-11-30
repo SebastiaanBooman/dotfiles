@@ -1,6 +1,10 @@
 #!/bin/bash
 
-git clone https://github.com/neovim/neovim.git $HOME
+git clone https://github.com/neovim/neovim.git $HOME/neovim
+if [ $? -ne 0 ]; then
+	echo "Error during nvim clone"
+	exit
+fi
 
 nvim_clone_directory="$HOME"/neovim
 
