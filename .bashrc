@@ -10,9 +10,6 @@ esac
 
 eval "$(fzf --bash)"
 
-alias fzf='fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})"'
-# only list directories
-alias fzfd='find . -type d | fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})"'
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -111,13 +108,29 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+alias fzf='fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})"'
+
 # have ls run after commands
 function cd { 
     builtin cd "$@" && ls 
 }
 
-function lsf { 
+function fzfls { 
     ls | fzf
+}
+
+# Path for storing the directory name to CD into after selecting a directory using fzf
+export FZF_CD_DIRECTORY_PATH="$HOME/fzf_cd_directory"
+
+function fzfd { 
+    # only list directories
+    find . -type d | fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})+abort"
+    if [ -f "$FZF_CD_DIRECTORY_PATH" ]; then
+	directory_to_cd_into=$(head -n 1 $FZF_CD_DIRECTORY_PATH)
+	cd $directory_to_cd_into
+	find . -maxdepth 1 | fzf
+	rm $FZF_CD_DIRECTORY_PATH
+    fi
 }
 
 function cls { 
@@ -128,7 +141,6 @@ function cls {
 function cd... { 
     builtin cd '../../'
 }
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
