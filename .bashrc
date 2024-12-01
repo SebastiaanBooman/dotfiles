@@ -10,9 +10,9 @@ esac
 
 eval "$(fzf --bash)"
 
-alias fzf='fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})+abort"'
+alias fzf='fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})"'
 # only list directories
-alias fzfd='find . -type d | fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})+abort"'
+alias fzfd='find . -type d | fzf --preview="$HOME/bin/fzf/preview_fzf.sh {}" --bind "enter:execute($HOME/bin/fzf/enter_bindings.sh {})"'
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -98,7 +98,7 @@ fi
 alias la='ls -A'
 #alias l='ls -CF'
 
-alias ytm='/home/seb/src/FirefoxExtensions/YoutubeMusicDisordRichPresence/server/main'
+alias ytm='$HOME/src/FirefoxExtensions/youtube-music-discord-rich-presence/server/main'
 alias gm="mplayer '/home/seb/Music/Guided Mediation 20.m4a'"
 alias vim="nvim"
 
