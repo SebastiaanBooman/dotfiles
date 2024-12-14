@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Start Redshift Conditionally
+Exec=/home/seb/bin/redshift/redshift_startup.sh
+Hidden=false
+NoDisplay=false
