@@ -87,7 +87,7 @@ setup_echo "Installing fzf"
 ./parts/fzf_setup.sh
 # Install youtube music discord rich presence app
 setup_echo "Installing youtube music discord rich presence app"
-./parts/youtube_music_discord_rich_presence.sh
+./parts/youtube_music_discord_rich_presence_setup.sh
 
 # Reboot
 echo "System setup completed successfully. Rebooting in 5 seconds..."
