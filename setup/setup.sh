@@ -66,10 +66,14 @@ while read package; do
 done < $flatpak_package_list_path
 
 # Set sudoers permissions
+setup_echo "Setup up sudoers permission"
 cp $dotfiles_path/sudo/sudoers /etc/sudoers
+rm $dotfiles_path/sudo/sudoers # we do not care about tracking the file
 
 chmod +x ./parts/xob_setup.sh
 chmod +x ./parts/neovim_setup.sh
+
+#TODO: Improve parts installation using loop
 
 # Building apps from source
 # Install volume display package
@@ -78,11 +82,14 @@ setup_echo "Installing xob"
 # Install Neovim (Debian stable contains an ancient version :( )
 setup_echo "Installing neovim"
 ./parts/neovim_setup.sh
+# Install FZF (Debian stable contains an ancient version :( (maybe I should hop))
+setup_echo "Installing fzf"
+./parts/fzf_setup.sh
 
 # Reboot
 echo "System setup completed successfully. Rebooting in 5 seconds..."
 
-# wait for 15 seconds to cancel if necessary
+# wait for 5 seconds to cancel if necessary
 sleep 5
 
 systemctl reboot
