@@ -88,6 +88,8 @@ setup_echo "Installing fzf"
 # Install youtube music discord rich presence app
 setup_echo "Installing youtube music discord rich presence app"
 ./parts/youtube_music_discord_rich_presence_setup.sh
+setup_echo "Installing i3 workspace history"
+./parts/i3_workspace_history_setup.sh
 
 # Reboot
 echo "System setup completed successfully. Rebooting in 5 seconds..."
