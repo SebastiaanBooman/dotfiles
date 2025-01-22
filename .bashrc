@@ -91,7 +91,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-#alias ll='ls -l'
+alias ll='ls -l'
 alias la='ls -A'
 #alias l='ls -CF'
 
@@ -155,12 +155,19 @@ fi
 
 export EDITOR="nvim"
 
+export JAVA_HOME="$HOME/bin/jdk-23.0.1/"
+
+export PATH="$HOME/bin/gradle-8.12/bin:$PATH"
+
 # Add programming languages to $PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+(eval "$(pyenv init --path)") &> /dev/null
 
 export PATH="/usr/local/go/bin:$PATH"
+export PATH="/$HOME/go/bin:$PATH"
+
+export PATH="$HOME/bin/jdk-23.0.1/bin:$PATH"
 
 # i3-sensible-terminal checks $TERMINAL variable with highest prio
 if [ -f /usr/bin/alacritty ]; then
@@ -169,3 +176,23 @@ fi
 
 # git bare repository alias for dotfiles storage
 alias cfg="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/"
+
+eval "$(ssh-agent)" 1> /dev/null
+ssh-add $HOME/.ssh/github_main &> /dev/null
+
+alias python=python3
+alias c=clear
+
+# git
+alias ga="git add"
+alias gd="git diff"
+alias gs="git status"
+alias gc="git commit -m"
+alias gp="git push"
+alias gcl="git-clone-bare"
+alias gb="git branch"
+alias gch="git checkout"
+alias gw="git worktree"
+
+alias gob="go build"
+
