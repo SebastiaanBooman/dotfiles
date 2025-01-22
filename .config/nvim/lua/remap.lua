@@ -40,7 +40,7 @@ vim.opt.cursorline = true
 
 vim.opt.scrolloff = 8
 
--- Maintain buffer on visual mode replace paste
+-- Maintain register on visual mode replace paste
 vim.keymap.set('v', 'p', [["_dP]])
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
@@ -58,10 +58,17 @@ vim.keymap.set('n', '<leader>w', '<cmd>w<CR>')
 vim.keymap.set('n', '<leader>q', '<cmd>wq!<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', 'pe', vim.diagnostic.goto_prev, { desc = 'Go to [P]revious [E]error' })
+vim.keymap.set('n', 'ne', vim.diagnostic.goto_next, { desc = 'Go to [N]ext [E]rror' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 --vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Copy and paste from clipboard and back
+vim.keymap.set('n', '<leader>p', '"+p')
+vim.keymap.set('n', '<leader>P', '"+P')
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>yy', '"+yy')
+vim.keymap.set('n', '<leader>Y', '"+Y')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
