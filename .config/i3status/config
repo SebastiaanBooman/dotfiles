@@ -15,13 +15,13 @@ order += "tztime local"
 order += "path_exists updates"
 
 tztime local {
-        format = "%Y-%m-%d %H:%M"
+        format = "%Y-%m-%d (%V) %H:%M"
 }
 
 # Checks whether a file called updates_available is present in /$HOME/bin/updates_available
 # If so, a green text with "updates" will show on i3 bar (This is a TODO)
-path_exists updates {
-        path = "/$HOME/bin/updates_available/updates_available"
-        format = "updates available"
-        format_down = ""
-}
+#path_exists updates {
+        #path = "$HOME/bin/updates_available"
+        #format = "updates available"
+        #format_down = ""
+#}
