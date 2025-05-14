@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Start Zathura Discord rich presence application
+Exec=/home/seb/bin/launch_zathura_discord_rich_presence.sh
+Hidden=false
+NoDisplay=false
