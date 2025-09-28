@@ -58,7 +58,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id /$HOME/bin/i3/volume_mixer.sh 
 bindsym $mod+Page_Down exec --no-startup-id /$HOME/bin/i3/xob/volume_mixer.sh down
 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym $mod+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# bindsym $mod+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -87,8 +87,8 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+p focus left
-bindsym $mod+n focus right
+bindsym $mod+Shift+p focus left
+bindsym $mod+Shift+n focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -154,9 +154,9 @@ bindsym $mod+z workspace $ws1
 bindsym $mod+x workspace $ws2
 bindsym $mod+c workspace $ws3
 bindsym $mod+v workspace $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
+bindsym $mod+n workspace $ws5
+bindsym $mod+m workspace $ws6
+bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
@@ -176,7 +176,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+u restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -215,7 +215,7 @@ for_window [class="^.*"] border pixel 0
 bindsym $mod+l exec --no-startup-id i3lock --color 000000 --ignore-empty-password --nofork
 
 # bindings for system control
-bindsym $mod+Shift+p workspace $cmd_ws exec alacritty -e /$HOME/bin/i3/system_ctl_commands.sh reboot
+bindsym $mod+Shift+r workspace $cmd_ws exec alacritty -e /$HOME/bin/i3/system_ctl_commands.sh reboot
 bindsym $mod+Shift+k workspace $cmd_ws exec alacritty -e /$HOME/bin/i3/system_ctl_commands.sh poweroff
 
 bindsym $mod+Shift+s exec /home/seb/bin/scrot_capture.sh
