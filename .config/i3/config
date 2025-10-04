@@ -3,7 +3,7 @@ exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/teresa_brew
 
 set $mod Mod4
 
-for_window [all] fullscreen enable
+#for_window [all] fullscreen enable
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -224,6 +224,7 @@ bindsym $mod+b exec --no-startup-id /$HOME/bin/i3/start_firefox_fullscreen.sh
 
 bindsym $mod+u workspace $ws4; exec /$HOME/bin/launch_discord.sh
 
+exec /$HOME/bin/i3/open_todo_notes.sh
 
 
 for_window [class="feh"] fullscreen disable.
