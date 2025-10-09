@@ -20,30 +20,33 @@ if [ ! -f "$main_todo_path" ]; then
 fi
 
 # create date variables
-printf -v year '%(%Y)T' -1
-printf -v week '%(%V)T' -1
-printf -v day '%(%d)T' -1
+year=$(date -u +%Y)
+week=$(date -u +%V)
+day=$(date -u +%d)
+echo $year
+echo $week
+echo $day
 
-year_path="$HOME/Documents/notes/planning/$year"
+year_path="$HOME/Documents/notes/planning/${year}"
 
 if [ ! -d "$year_path" ]; then
 	mkdir "$year_path"
 fi
 
-week_path="$HOME/Documents/notes/planning/$year/$week"
+week_path="$HOME/Documents/notes/planning/${year}/${week}"
 
 if [ ! -d $week_path ]; then
 	mkdir "$week_path"
 fi
 
-daily_todo_path="$HOME/Documents/notes/planning/$year/$week/planning_$day.md"
+daily_todo_path="$HOME/Documents/notes/planning/${year}/${week}/planning_${day}.md"
 
 if [ ! -f "$daily_todo_path" ]; then
-	echo -e "# TODO\n\n# Done" > "$daily_todo_path"
+	printf "# TODO\n\n# Done" > "$daily_todo_path"
 fi
 
 i3-msg "workspace 1" > /dev/null 2>&1
 
 # because nvim can open files that dont exist yet, do not have to create a file for it
-i3-msg "exec i3-sensible-terminal -e nvim '$main_todo_path'"
-i3-msg "exec i3-sensible-terminal -e nvim '$daily_todo_path'"
+i3-msg "exec i3-sensible-terminal -e nvim \"$daily_todo_path\""
+i3-msg "exec i3-sensible-terminal -e nvim \"$main_todo_path\""
