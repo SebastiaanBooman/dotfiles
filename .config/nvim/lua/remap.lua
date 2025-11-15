@@ -58,9 +58,9 @@ vim.keymap.set('n', '<leader>w', '<cmd>w<CR>')
 vim.keymap.set('n', '<leader>q', '<cmd>wq!<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', 'pe', vim.diagnostic.goto_prev, { desc = 'Go to [P]revious [E]error' })
-vim.keymap.set('n', 'ne', vim.diagnostic.goto_next, { desc = 'Go to [N]ext [E]rror' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', 'ne', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = 'Go to [N]ext [E]rror' })
 --vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Copy and paste from clipboard and back
