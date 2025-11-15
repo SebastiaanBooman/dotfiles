@@ -39,7 +39,21 @@ return { -- LSP Configuration & Plugins
 
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-          map('gh', vim.lsp.buf.hover, 'Get Hover')
+          --map('gh',function() vim.lsp.buf.hover() end , 'Get Hover')
+          map('gh', function()
+            local bufnr = vim.api.nvim_get_current_buf()
+            local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+            -- NOTE: lnum option is 0 based...
+            local diagnostics = vim.diagnostic.get(bufnr, { lnum = row - 1 })
+
+            for _, diag in ipairs(diagnostics) do
+              if diag.severity == vim.diagnostic.severity.ERROR or diag.severity == vim.diagnostic.severity.WARN then
+                vim.diagnostic.open_float()
+                return
+              end
+            end
+            vim.lsp.buf.hover()
+          end, 'Get Hover or diagnostic.')
         end
 
         -- The following two autocommands are used to highlight references of the
